@@ -848,33 +848,33 @@ endmodule
 
 module pulsecounter(rst, \input , clock_config, pulseCount, clk);
   reg \$auto$verilog_backend.cc:2083:dump_module$6  = 0;
-  wire [11:0] \$1 ;
+  wire [14:0] \$1 ;
   wire \$10 ;
-  wire [11:0] \$12 ;
-  wire [11:0] \$13 ;
-  wire [11:0] \$2 ;
+  wire [14:0] \$12 ;
+  wire [14:0] \$13 ;
+  wire [14:0] \$2 ;
   wire \$4 ;
   wire \$6 ;
   wire \$8 ;
   input clk;
   wire clk;
-  reg [10:0] clockCount = 11'h000;
-  reg [10:0] \clockCount$next ;
-  input [1:0] clock_config;
-  wire [1:0] clock_config;
+  reg [13:0] clockCount = 14'h0000;
+  reg [13:0] \clockCount$next ;
+  input [2:0] clock_config;
+  wire [2:0] clock_config;
   wire edge_detect_input;
   wire edge_detect_output;
   input \input ;
   wire \input ;
-  output [10:0] pulseCount;
-  reg [10:0] pulseCount = 11'h000;
-  reg [10:0] \pulseCount$next ;
+  output [13:0] pulseCount;
+  reg [13:0] pulseCount = 14'h0000;
+  reg [13:0] \pulseCount$next ;
   input rst;
   wire rst;
-  reg [10:0] runningPulseCount = 11'h000;
-  reg [10:0] \runningPulseCount$next ;
-  reg [10:0] singlePeriodClockCount = 11'h000;
-  reg [10:0] \singlePeriodClockCount$next ;
+  reg [13:0] runningPulseCount = 14'h0000;
+  reg [13:0] \runningPulseCount$next ;
+  reg [13:0] singlePeriodClockCount = 14'h0000;
+  reg [13:0] \singlePeriodClockCount$next ;
   assign \$10  = ! clockCount;
   assign \$13  = runningPulseCount + 1'h1;
   always @(posedge clk)
@@ -897,32 +897,32 @@ module pulsecounter(rst, \input , clock_config, pulseCount, clk);
   );
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$6 ) begin end
-    \clockCount$next  = \$2 [10:0];
+    \clockCount$next  = \$2 [13:0];
     casez (\$4 )
       1'h1:
-          \clockCount$next  = 11'h000;
+          \clockCount$next  = 14'h0000;
     endcase
     casez (rst)
       1'h1:
-          \clockCount$next  = 11'h000;
+          \clockCount$next  = 14'h0000;
     endcase
   end
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$6 ) begin end
-    (* full_case = 32'd1 *)
+    \singlePeriodClockCount$next  = singlePeriodClockCount;
     casez (clock_config)
-      2'h0:
-          \singlePeriodClockCount$next  = 11'h1f4;
-      2'h1:
-          \singlePeriodClockCount$next  = 11'h3e8;
-      2'h3:
-          \singlePeriodClockCount$next  = 11'h667;
-      2'h2:
-          \singlePeriodClockCount$next  = 11'h7d0;
+      3'h0:
+          \singlePeriodClockCount$next  = 14'h01f4;
+      3'h1:
+          \singlePeriodClockCount$next  = 14'h03e8;
+      3'h3:
+          \singlePeriodClockCount$next  = 14'h0667;
+      3'h2:
+          \singlePeriodClockCount$next  = 14'h07d0;
     endcase
     casez (rst)
       1'h1:
-          \singlePeriodClockCount$next  = 11'h000;
+          \singlePeriodClockCount$next  = 14'h0000;
     endcase
   end
   always @* begin
@@ -934,7 +934,7 @@ module pulsecounter(rst, \input , clock_config, pulseCount, clk);
     endcase
     casez (rst)
       1'h1:
-          \pulseCount$next  = 11'h000;
+          \pulseCount$next  = 14'h0000;
     endcase
   end
   always @* begin
@@ -951,20 +951,20 @@ module pulsecounter(rst, \input , clock_config, pulseCount, clk);
                 (* full_case = 32'd1 *)
                 casez (edge_detect_output)
                   1'h1:
-                      \runningPulseCount$next  = 11'h001;
+                      \runningPulseCount$next  = 14'h0001;
                   default:
-                      \runningPulseCount$next  = 11'h000;
+                      \runningPulseCount$next  = 14'h0000;
                 endcase
             default:
                 casez (edge_detect_output)
                   1'h1:
-                      \runningPulseCount$next  = \$13 [10:0];
+                      \runningPulseCount$next  = \$13 [13:0];
                 endcase
           endcase
     endcase
     casez (rst)
       1'h1:
-          \runningPulseCount$next  = 11'h000;
+          \runningPulseCount$next  = 14'h0000;
     endcase
   end
   assign \$1  = \$2 ;
@@ -982,7 +982,7 @@ module tt_um_psychogenic_neptuneproportional(uo_out, uio_in, uio_out, uio_oe, en
   input rst_n;
   wire rst_n;
   wire tuner_clk;
-  wire [1:0] tuner_clock_config;
+  wire [2:0] tuner_clock_config;
   wire [7:0] tuner_displaySegments;
   wire tuner_displaySelect;
   wire tuner_input_pulses;
@@ -1010,9 +1010,9 @@ module tt_um_psychogenic_neptuneproportional(uo_out, uio_in, uio_out, uio_oe, en
   );
   assign uo_out = { tuner_displaySelect, tuner_displaySegments[7:1] };
   assign tuner_input_pulses = input_pulses;
-  assign tuner_clock_config = ui_in[3:2];
+  assign tuner_clock_config = ui_in[4:2];
   assign uio_out = tuner_pulseCount;
-  assign input_pulses = ui_in[4];
+  assign input_pulses = ui_in[5];
   assign uio_oe = 8'hff;
   assign tuner_rst = \$1 ;
   assign tuner_clk = clk;
@@ -1021,8 +1021,8 @@ endmodule
 module tuner(rst, pulseCount, clock_config, input_pulses, displaySegments, displaySelect, clk);
   input clk;
   wire clk;
-  input [1:0] clock_config;
-  wire [1:0] clock_config;
+  input [2:0] clock_config;
+  wire [2:0] clock_config;
   wire [7:0] discriminator_edge_count;
   wire discriminator_match_exact;
   wire discriminator_match_far;
@@ -1040,9 +1040,9 @@ module tuner(rst, pulseCount, clock_config, input_pulses, displaySegments, displ
   wire input_pulses;
   output [7:0] pulseCount;
   wire [7:0] pulseCount;
-  wire [1:0] pulsecounter_clock_config;
+  wire [2:0] pulsecounter_clock_config;
   wire pulsecounter_input;
-  wire [10:0] pulsecounter_pulseCount;
+  wire [13:0] pulsecounter_pulseCount;
   input rst;
   wire rst;
   discriminator discriminator (

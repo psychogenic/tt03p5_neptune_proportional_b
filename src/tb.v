@@ -10,7 +10,7 @@ module tb (
     // testbench is controlled by test.py
     input clk,
     input rst_n,
-    input [1:0] clk_config,
+    input [2:0] clk_config,
     input input_pulse,
     output [6:0] segments,
     output prox_select
@@ -32,7 +32,7 @@ module tb (
     
     
     // wire up the inputs and outputs
-    wire [7:0] inputs = {3'b0, input_pulse, clk_config[1], clk_config[0], 2'b0};
+    wire [7:0] inputs = {2'b0, input_pulse, clk_config[2], clk_config[1], clk_config[0], 2'b0};
     wire [7:0] outputs;
     assign prox_select = outputs[7];
     assign segments = outputs[6:0];
