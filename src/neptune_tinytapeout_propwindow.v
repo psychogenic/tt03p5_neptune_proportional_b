@@ -848,33 +848,33 @@ endmodule
 
 module pulsecounter(rst, \input , clock_config, pulseCount, clk);
   reg \$auto$verilog_backend.cc:2083:dump_module$6  = 0;
-  wire [14:0] \$1 ;
+  wire [15:0] \$1 ;
   wire \$10 ;
-  wire [14:0] \$12 ;
-  wire [14:0] \$13 ;
-  wire [14:0] \$2 ;
+  wire [15:0] \$12 ;
+  wire [15:0] \$13 ;
+  wire [15:0] \$2 ;
   wire \$4 ;
   wire \$6 ;
   wire \$8 ;
   input clk;
   wire clk;
-  reg [13:0] clockCount = 14'h0000;
-  reg [13:0] \clockCount$next ;
+  reg [14:0] clockCount = 15'h0000;
+  reg [14:0] \clockCount$next ;
   input [2:0] clock_config;
   wire [2:0] clock_config;
   wire edge_detect_input;
   wire edge_detect_output;
   input \input ;
   wire \input ;
-  output [13:0] pulseCount;
-  reg [13:0] pulseCount = 14'h0000;
-  reg [13:0] \pulseCount$next ;
+  output [14:0] pulseCount;
+  reg [14:0] pulseCount = 15'h0000;
+  reg [14:0] \pulseCount$next ;
   input rst;
   wire rst;
-  reg [13:0] runningPulseCount = 14'h0000;
-  reg [13:0] \runningPulseCount$next ;
-  reg [13:0] singlePeriodClockCount = 14'h0000;
-  reg [13:0] \singlePeriodClockCount$next ;
+  reg [14:0] runningPulseCount = 15'h0000;
+  reg [14:0] \runningPulseCount$next ;
+  reg [14:0] singlePeriodClockCount = 15'h0000;
+  reg [14:0] \singlePeriodClockCount$next ;
   assign \$10  = ! clockCount;
   assign \$13  = runningPulseCount + 1'h1;
   always @(posedge clk)
@@ -897,14 +897,14 @@ module pulsecounter(rst, \input , clock_config, pulseCount, clk);
   );
   always @* begin
     if (\$auto$verilog_backend.cc:2083:dump_module$6 ) begin end
-    \clockCount$next  = \$2 [13:0];
+    \clockCount$next  = \$2 [14:0];
     casez (\$4 )
       1'h1:
-          \clockCount$next  = 14'h0000;
+          \clockCount$next  = 15'h0000;
     endcase
     casez (rst)
       1'h1:
-          \clockCount$next  = 14'h0000;
+          \clockCount$next  = 15'h0000;
     endcase
   end
   always @* begin
@@ -912,17 +912,17 @@ module pulsecounter(rst, \input , clock_config, pulseCount, clk);
     \singlePeriodClockCount$next  = singlePeriodClockCount;
     casez (clock_config)
       3'h0:
-          \singlePeriodClockCount$next  = 14'h01f4;
+          \singlePeriodClockCount$next  = 15'h01f4;
       3'h1:
-          \singlePeriodClockCount$next  = 14'h03e8;
+          \singlePeriodClockCount$next  = 15'h03e8;
       3'h3:
-          \singlePeriodClockCount$next  = 14'h0667;
+          \singlePeriodClockCount$next  = 15'h0667;
       3'h2:
-          \singlePeriodClockCount$next  = 14'h07d0;
+          \singlePeriodClockCount$next  = 15'h07d0;
     endcase
     casez (rst)
       1'h1:
-          \singlePeriodClockCount$next  = 14'h0000;
+          \singlePeriodClockCount$next  = 15'h0000;
     endcase
   end
   always @* begin
@@ -934,7 +934,7 @@ module pulsecounter(rst, \input , clock_config, pulseCount, clk);
     endcase
     casez (rst)
       1'h1:
-          \pulseCount$next  = 14'h0000;
+          \pulseCount$next  = 15'h0000;
     endcase
   end
   always @* begin
@@ -951,20 +951,20 @@ module pulsecounter(rst, \input , clock_config, pulseCount, clk);
                 (* full_case = 32'd1 *)
                 casez (edge_detect_output)
                   1'h1:
-                      \runningPulseCount$next  = 14'h0001;
+                      \runningPulseCount$next  = 15'h0001;
                   default:
-                      \runningPulseCount$next  = 14'h0000;
+                      \runningPulseCount$next  = 15'h0000;
                 endcase
             default:
                 casez (edge_detect_output)
                   1'h1:
-                      \runningPulseCount$next  = \$13 [13:0];
+                      \runningPulseCount$next  = \$13 [14:0];
                 endcase
           endcase
     endcase
     casez (rst)
       1'h1:
-          \runningPulseCount$next  = 14'h0000;
+          \runningPulseCount$next  = 15'h0000;
     endcase
   end
   assign \$1  = \$2 ;
@@ -1042,7 +1042,7 @@ module tuner(rst, pulseCount, clock_config, input_pulses, displaySegments, displ
   wire [7:0] pulseCount;
   wire [2:0] pulsecounter_clock_config;
   wire pulsecounter_input;
-  wire [13:0] pulsecounter_pulseCount;
+  wire [14:0] pulsecounter_pulseCount;
   input rst;
   wire rst;
   discriminator discriminator (
